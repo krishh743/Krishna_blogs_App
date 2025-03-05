@@ -136,3 +136,28 @@
   </svg>
 </button> */}
 {/* </div> */}
+
+
+
+
+// Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+
+// // Your web app's Firebase configuration
+// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCiLivuXfd-ccA6o1Q5T9ziH9xO5F4cyXw",
+//   authDomain: "krishna-blogs-app.firebaseapp.com",
+//   projectId: "krishna-blogs-app",
+//   storageBucket: "krishna-blogs-app.firebasestorage.app",
+//   messagingSenderId: "701026205377",
+//   appId: "1:701026205377:web:1131373c1f54c3e3781e40",
+//   measurementId: "G-X9NVYPT5N9"
+// };
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);

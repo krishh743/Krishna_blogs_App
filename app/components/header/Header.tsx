@@ -39,7 +39,7 @@ function Header() {
   return (
     <>
       <nav className="bg-[#f8f8f8] border-xl top-0 shadow-xl bg-transparent backdrop-blur-sm sticky">
-        <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="max-w-screen-3xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a
             href="/" // Corrected to use root path
             className="flex items-center space-x-3 rtl:space-x-reverse h-[30px] sm:h-[100px] md:h-[30px] lg:h-[30px] xl:h-[30px] 2xl:h-[80px]"

@@ -10,10 +10,10 @@ interface HeaderData {
 }
 
 export const Header = (props: { data: HeaderData }) => {
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter(); 
 
   const handleGetStarted = () => {
-    router.push("/"); // Navigate to /BlogsCategories
+    router.push("/"); 
   };
   return (
     <header
@@ -24,16 +24,16 @@ export const Header = (props: { data: HeaderData }) => {
       <div className="intro h-full flex items-center justify-center">
         <div className="overlay bg-black bg-opacity-50 w-full h-full absolute top-0 left-0"></div>
         <div className="container relative z-10 text-center text-white">
-          <div className="max-w-2xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          <div className="max-w-2xl mx-auto flex flex-col items-center justify-center gap-10">
+            <h1 className="text-4xl md:text-8xl font-bold">
               {props.data ? props.data.title : "Loading"}
               <span></span>
             </h1>
-            <p className="text-lg md:text-xl mb-6">
+            <p className="text-lg md:text-xl">
               {props.data ? props.data.paragraph : "Loading"}
             </p>
-            <button // Change <a> to <button>
-              onClick={handleGetStarted} // Use onClick handler
+            <button
+              onClick={handleGetStarted}
               className="btn bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg shadow-lg transition duration-300"
             >
               Get Started

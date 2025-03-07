@@ -1,7 +1,6 @@
 import React from 'react';
 import { FaComments, FaBullhorn, FaUsers, FaMagic } from 'react-icons/fa';
-import { Card } from 'antd'; // Import Ant Design Card
-
+import { Card } from 'antd';
 interface FeatureItem {
   icon: string;
   title: string;

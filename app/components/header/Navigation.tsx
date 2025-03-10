@@ -42,27 +42,7 @@ export const Navigation = () => {
           >
             Services
           </a>
-          {/* <a
-            href="#portfolio"
-            className="page-scroll hover:text-blue-600 py-2 md:py-0"
-            onClick={() => setIsOpen(false)}
-          >
-            Gallery
-          </a> */}
-          {/* <a
-            href="#testimonials"
-            className="page-scroll hover:text-blue-600 py-2 md:py-0"
-            onClick={() => setIsOpen(false)}
-          >
-            Testimonials
-          </a> */}
-          {/* <a
-            href="#team"
-            className="page-scroll hover:text-blue-600 py-2 md:py-0"
-            onClick={() => setIsOpen(false)}
-          >
-            Team
-          </a> */}
+          
           <a
             href="#contact"
             className="page-scroll hover:text-blue-600 py-2 md:py-0"

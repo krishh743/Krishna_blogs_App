@@ -1,22 +1,9 @@
 "use client";
 
-// import Image from "next/image";
-// import LandingPage from "./pages/LandingPage/LandingPage";
-
-// export default function Home() {
-//   return (
-//   <div className="">
-//     <LandingPage/>
-
-//   </div>
-//   );
-// }
-
 import { useState, useEffect } from "react";
 import "./globals.css";
 
 import SmoothScroll from "smooth-scroll";
-// import "./App.css";
 import { About } from "./components/header/About";
 import { Services } from "./components/header/Services";
 import { Contact } from "./components/header/ContactUs";

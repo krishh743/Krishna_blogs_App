@@ -1,6 +1,6 @@
 // "use client";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 import Banner from "../../assets/intro-bg.jpg";
 
@@ -10,10 +10,10 @@ interface HeaderData {
 }
 
 export const Header = (props: { data: HeaderData }) => {
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push("/"); 
+    router.push("/");
   };
   return (
     <header
@@ -38,7 +38,6 @@ export const Header = (props: { data: HeaderData }) => {
             >
               Get Started
             </button>
-
           </div>
         </div>
       </div>

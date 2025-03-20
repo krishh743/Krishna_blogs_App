@@ -39,7 +39,6 @@ interface PageData {
 }
 
 
-
 export const pageData : PageData ={
   "Header": {
     "title": "We are a Landing Page",
@@ -124,6 +123,5 @@ export const pageData : PageData ={
       "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
     }
   ]
-
 
 }

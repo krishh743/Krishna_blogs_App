@@ -13,7 +13,7 @@ export const Header = (props: { data: HeaderData }) => {
   const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push("/BlogsCategories");
+    router.push("/categories-blogs");
   };
   return (
     <header

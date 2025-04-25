@@ -3,7 +3,7 @@ import AboutUs from "../../assets/about.jpg";
 
 export const About = (props: { data: { paragraph?: string; Why?: string[]; Why2?: string[] } }) => {
   return (
-    <div id="about" className="py-16 bg-white">
+    <div id="about" className="py-16 bg-white px-6">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
         <Image src={AboutUs} className="rounded-lg shadow-lg" alt="About Us" width={500} height={300} />
         <div>

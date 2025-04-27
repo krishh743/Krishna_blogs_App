@@ -11,7 +11,7 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
          <div className="flex justify-end mb-4">
         <Link
           href="/all-pages/categories-blogs"
-          className="text-sm text-blue-500 hover:underline border border-blue-500 px-3 py-1 rounded"
+          className="text-sm text-gray-800 hover:underline hover:text-orange-800 hover:border-orange-800 border border-gray-800 px-3 py-1 rounded"
         >
           ← Back to Blogs
         </Link>

@@ -53,7 +53,7 @@ export const Contact = (props: {
 
   return (
     <div>
-      <div id="contact" className="py-16 bg-gray-100">
+      <div id="contact" className="py-16 px-6  bg-gray-100">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>

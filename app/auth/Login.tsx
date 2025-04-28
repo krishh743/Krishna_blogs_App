@@ -8,7 +8,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ onClose }) => {
+const LoginPage: React.FC<ModalProps> = ({ onClose }) => {
 
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -84,20 +84,8 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
           {/* Body */}
           <div className="p-4 md:p-5">
             <form className="space-y-4" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="input"
-              />
-              <input
-                type="tel"
-                placeholder="Mobile Number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="input"
-              />
+             
+             
               <input
                 type="email"
                 placeholder="Email"
@@ -120,12 +108,12 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
                 type="submit"
                 className="w-full text-white bg-gray-800 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
               >
-                Create Account
+                Login Here
               </button>
-              <div className="text-sm font-medium text-gray-500 hover:text-orange-500  text-center">
-                Already registered?{" "}
-                <a href="#" className="text-blue-700 hover:underline hover:text-orange-500">
-                  Login
+              <div className="text-sm font-medium text-gray-500 dark:text-gray-300 text-center">
+                Not registered?{" "}
+                <a className="text-blue-700 hover:underline hover:text-orange-500 dark:text-blue-500">
+                  Create Account here
                 </a>
               </div>
             </form>
@@ -136,4 +124,4 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
   );
 };
 
-export default Modal;
+export default LoginPage;

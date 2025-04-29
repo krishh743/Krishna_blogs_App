@@ -16,8 +16,8 @@ const iconMap: { [key: string]: React.ReactNode } = {
 
 export const Features = (props: { data: FeatureItem[] }) => {
   return (
-    <div id="features" className="py-20 bg-gradient-to-br from-gray-100 to-gray-200">
-      <div className="container mx-auto px-4">
+    <div id="features" className="py-20 px-6 bg-gradient-to-br from-gray-100 to-gray-200">
+      <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Key Features</h2>
           <p className="text-lg text-gray-600">Discover what makes us stand out.</p>

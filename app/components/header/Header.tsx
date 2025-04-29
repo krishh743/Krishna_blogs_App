@@ -1,7 +1,7 @@
-// "use client";
+"use client";
+
 
 import { useRouter } from "next/navigation";
-
 import Banner from "../../assets/intro-bg.jpg";
 
 interface HeaderData {
@@ -13,7 +13,7 @@ export const Header = (props: { data: HeaderData }) => {
   const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push("/categories-blogs");
+    router.push("/all-pages/categories-blogs");
   };
   return (
     <header
@@ -34,9 +34,9 @@ export const Header = (props: { data: HeaderData }) => {
             </p>
             <button
               onClick={handleGetStarted}
-              className="btn bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg shadow-lg transition duration-300"
+              className="btn border hover:bg-orange-500  text-white py-3 px-6 rounded-lg shadow-lg transition duration-300"
             >
-              Get Started
+              Get Blogs
             </button>
           </div>
         </div>

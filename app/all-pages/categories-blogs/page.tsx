@@ -1,25 +1,47 @@
-'use client';
+"use client";
 
-
-import { BlogCard } from '@/app/components/BlogCard';
-import { NewsletterHeader } from '@/app/components/NewsletterHeader';
-import { blogsData } from '@/app/data/blogs';
-import React from 'react'
+import { BlogCard } from "@/app/components/BlogCard";
+import { NewsletterHeader } from "@/app/components/NewsletterHeader";
+import { blogsData } from "@/app/data/blogs";
+import React from "react";
+import { useRouter } from "next/navigation";
+import Pagination from "@/app/components/pagination/Pagination";
 
 function page() {
+  const router = useRouter();
   return (
     <main className="max-w-5xl mx-auto">
       <NewsletterHeader />
+      <div className="flex justify-end gap-4 items-center">
+        {/* <select
+          id="countries"
+          className="w-[30%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          {blogsData.map((items) => {
+            return <option selected>{items.slug}</option>;
+          })}
+        </select> */}
+        <button
+          onClick={() => router.push("/Admin-pages/create-post")}
+          type="button"
+          className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+        >
+          Create Post
+        </button>
+      </div>
       <div className="border-t">
-        {blogsData.map(blog => (
+        {blogsData.map((blog) => (
           <BlogCard key={blog.slug} blog={blog} />
         ))}
       </div>
+      <div>
+        <Pagination/>
+      </div>
     </main>
-  )
+  );
 }
 
-export default page
+export default page;
 
 // import React from 'react';
 // import * as XLSX from 'xlsx';

@@ -124,7 +124,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
               </button>
               <div className="text-sm font-medium text-gray-500 hover:text-orange-500  text-center">
                 Already registered?{" "}
-                <a href="#" className="text-blue-700 hover:underline hover:text-orange-500">
+                <a className="text-blue-700 hover:underline hover:text-orange-500">
                   Login
                 </a>
               </div>

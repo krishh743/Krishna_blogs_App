@@ -26,8 +26,8 @@ const ServiceIcons :any= {
 
 export const Services = (props: { data: ServiceItem[] }) => {
   return (
-    <div id="services" className="py-20 bg-gray-100">
-      <div className="container mx-auto px-4">
+    <div id="services" className="py-20 px-6 bg-gray-100">
+      <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Services</h2>
           <p className="text-lg text-gray-600">

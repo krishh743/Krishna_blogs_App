@@ -1,0 +1,3 @@
+const myData ={
+    name:"krishna "
+}

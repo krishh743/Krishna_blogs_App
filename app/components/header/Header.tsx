@@ -3,6 +3,7 @@
 
 import { useRouter } from "next/navigation";
 import Banner from "../../assets/intro-bg.jpg";
+import { Button } from "antd";
 
 interface HeaderData {
   title: string;
@@ -32,12 +33,12 @@ export const Header = (props: { data: HeaderData }) => {
             <p className="text-lg md:text-xl">
               {props.data ? props.data.paragraph : "Loading"}
             </p>
-            <button
+            <Button
               onClick={handleGetStarted}
-              className="btn border hover:bg-orange-500  text-white py-3 px-6 rounded-lg shadow-lg transition duration-300"
+              // className="btn border hover:bg-orange-500  text-white py-3 px-6 rounded-lg shadow-lg transition duration-300"
             >
               Get Blogs
-            </button>
+            </Button>
           </div>
         </div>
       </div>

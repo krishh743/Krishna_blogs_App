@@ -6,14 +6,16 @@ import { blogsData } from "@/app/data/blogs";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Pagination from "@/app/components/pagination/Pagination";
+import Link from "next/link";
+import { Button } from "antd";
 
 function page() {
   const router = useRouter();
   return (
     <main className="max-w-5xl mx-auto">
-      <NewsletterHeader />
-      <div className="flex justify-end gap-4 items-center">
-        {/* <select
+      {/* <NewsletterHeader /> */}
+      <div className="flex justify-between py-4 gap-4 items-center">
+        {/* <x
           id="countries"
           className="w-[30%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
@@ -21,13 +23,20 @@ function page() {
             return <option selected>{items.slug}</option>;
           })}
         </select> */}
-        <button
+          {/* <div className="flex justify-end mb-4 w-full"> */}
+        <Button
+        onClick={()=>router.push("/")}
+          // className="text-sm text-gray-800 hover:underline hover:text-orange-800 hover:border-orange-800 border border-gray-800 px-3 py-1 rounded"
+        >
+          ← Go to Home
+        </Button>
+      {/* </div> */}
+        <Button
           onClick={() => router.push("/Admin-pages/create-post")}
-          type="button"
-          className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+          // className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
         >
           Create Post
-        </button>
+        </Button>
       </div>
       <div className="border-t">
         {blogsData.map((blog) => (

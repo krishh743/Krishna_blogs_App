@@ -1,206 +1,108 @@
 "use client";
 
 import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { RxCross2 } from "react-icons/rx";
-// import { SignUpApi } from "@/app/api/signup-api";
 
 interface ModalProps {
   onClose: () => void;
 }
 
 const LoginPage: React.FC<ModalProps> = ({ onClose }) => {
+  const router = useRouter();
 
-  const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [loginFields,setLoginFields]=useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess("");
 
-    if (!fullName || !phone || !email || !password) {
-      setError("All fields are required.");
+    if (!email || !password) {
+      setError("Email and Password are required.");
       return;
     }
 
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setError("Enter a valid email.");
-      return;
-    }
+    const res = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
-      return;
-    }
-
-    try {
-      const res = await fetch("/services/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      
-
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.error || "Signup failed");
-
-      setSuccess("Account created successfully!");
-      setEmail("");
-      setPassword("");
-      setFullName("");
-      setPhone("");
-    } catch (err: any) {
-      setError(err.message);
+    if (res?.error) {
+      setError("Invalid email or password.");
+    } else {
+      setSuccess("Logged in successfully!");
+      setTimeout(() => {
+        router.push("/all-pages/categories-blogs");
+      }, 1000);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative w-full max-w-md p-4">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-600 rounded-t">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Sign Up
-            </h3>
-            <button
-              onClick={onClose}
-              className="text-gray-800 hover:text-orange-800 dark:hover:bg-black-800 dark:hover:text-white rounded-lg w-10 h-10 inline-flex justify-center items-center"
-            >
-              <RxCross2 size={25}/>
-              <span className="sr-only">Close modal</span>
-            </button>
-          </div>
-
-          {/* Body */}
-          <div className="p-4 md:p-5">
-            <form className="space-y-4" onSubmit={handleSubmit}>
-             
-             
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input"
-              />
-
-              {error && <p className="text-red-500 text-sm">{error}</p>}
-              {success && <p className="text-green-500 text-sm">{success}</p>}
-
-              <button
-                type="submit"
-                className="w-full text-white bg-gray-800 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
-              >
-                Login Here
-              </button>
-              <div className="text-sm font-medium text-gray-500 dark:text-gray-300 text-center">
-                Not registered?{" "}
-                <a className="text-blue-700 hover:underline hover:text-orange-500 dark:text-blue-500">
-                  Create Account here
-                </a>
-              </div>
-            </form>
-          </div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl w-full max-w-md mx-4 p-6 relative animate-fade-in">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-2xl font-semibold text-zinc-800 dark:text-white">
+            Login
+          </h3>
+          <button
+            onClick={onClose}
+            className="text-zinc-600 hover:text-red-500 transition-colors"
+          >
+            <RxCross2 size={24} />
+          </button>
         </div>
+
+        {/* Form */}
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            value={email}
+            placeholder="Email"
+            className="px-4 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 dark:bg-orange-300 dark:border-orange-300 dark:text-white"
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            value={password}
+            placeholder="Password"
+            className="px-4 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 dark:bg-orange-300 dark:border-orange-300 dark:text-white"
+          />
+          <button
+            type="submit"
+            className="w-full text-white bg-gray-800 hover:bg-orange-800 transition-colors rounded-lg px-4 py-2 font-medium"
+          >
+            Login
+          </button>
+
+          {error && (
+            <div className="bg-red-500 text-white text-sm py-1 px-3 rounded-md mt-1">
+              {error}
+            </div>
+          )}
+          {success && (
+            <div className="bg-green-500 text-white text-sm py-1 px-3 rounded-md mt-1">
+              {success}
+            </div>
+          )}
+
+          <p className="text-sm text-right mt-2 text-zinc-600 dark:text-zinc-300">
+            Don't have an account?{" "}
+            <span className="text-green-600 underline cursor-pointer">
+              Sign Up
+            </span>
+          </p>
+        </form>
       </div>
     </div>
   );
 };
 
 export default LoginPage;
-// "use client";
-
-// import Link from "next/link";
-// import { useState } from "react";
-// import { signIn } from "next-auth/react";
-// import { useRouter } from "next/navigation";
-// import type { FormEvent } from "react";
-
-// interface LoginPageProps {
-//   onClose?: () => void; // Optional if you're not using it currently
-// }
-
-// export default function LoginPage({ onClose }: LoginPageProps) {
-//   const [email, setEmail] = useState<string>("");
-//   const [password, setPassword] = useState<string>("");
-//   const [error, setError] = useState<string>("");
-
-//   const router = useRouter();
-
-//   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-//     e.preventDefault();
-
-//     try {
-//       const res = await signIn("credentials", {
-//         email,
-//         password,
-//         redirect: false,
-//       });
-
-//       if (res && res.error) {
-//         setError("Invalid Credentials");
-//         return;
-//       }
-
-//       router.replace("dashboard");
-//     } catch (error) {
-//       console.log("Login error:", error);
-//     }
-//   };
-
-//   return (
-//     <div className="grid place-items-center h-screen">
-//       <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400">
-//         <h1 className="text-xl font-bold my-4">Login</h1>
-
-//         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-//           <input
-//             onChange={(e) => setEmail(e.target.value)}
-//             type="email"
-//             placeholder="Email"
-//             required
-//           />
-//           <input
-//             onChange={(e) => setPassword(e.target.value)}
-//             type="password"
-//             placeholder="Password"
-//             required
-//           />
-//           <button
-//             type="submit"
-//             className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2"
-//           >
-//             Login
-//           </button>
-//           {error && (
-//             <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-//               {error}
-//             </div>
-//           )}
-
-//           <Link className="text-sm mt-3 text-right" href={"/register"}>
-//             Don&apos;t have an account?{" "}
-//             <span className="underline">Register</span>
-//           </Link>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }

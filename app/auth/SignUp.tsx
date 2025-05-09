@@ -1,136 +1,120 @@
 "use client";
 
+import { Button } from "antd";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-// import { SignUpApi } from "@/app/api/signup-api";
 
 interface ModalProps {
   onClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ onClose }) => {
 
-  const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
+// app/api/auth/[...nextauth]    krishnakushwaha743 vdqAPQOnbCJ166rX
+
+const Modal: React.FC<ModalProps> = ({ onClose }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [loginFields,setLoginFields]=useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
-    if (!fullName || !phone || !email || !password) {
-      setError("All fields are required.");
-      return;
-    }
-
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setError("Enter a valid email.");
-      return;
-    }
-
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
+    if (!name || !email || !password) {
+      setError("All fields are necessary.");
       return;
     }
 
     try {
-      const res = await fetch("/services/api/auth/signup", {
+      const resUserExists = await fetch("/services/api/auth/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
-      
 
+      const { user } = await resUserExists.json();
+      if (user) {
+        setError("User already exists.");
+        return;
+      }
 
-      const data = await res.json();
+      const res = await fetch("/services/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+      console.log(res,"res")
 
-      if (!res.ok) throw new Error(data.error || "Signup failed");
-
-      setSuccess("Account created successfully!");
-      setEmail("");
-      setPassword("");
-      setFullName("");
-      setPhone("");
-    } catch (err: any) {
-      setError(err.message);
+      if (res.ok) {
+        const form = e.target as HTMLFormElement;
+        console.log(form,"form")
+        form.reset();
+        router.push("/");
+      } else {
+        console.log("User registration failed.");
+      }
+    } catch (error) {
+      console.log("Error during registration: ", error);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative w-full max-w-md p-4">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-600 rounded-t">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Sign Up
-            </h3>
-            <button
-              onClick={onClose}
-              className="text-gray-800 hover:text-orange-800 dark:hover:bg-black-800 dark:hover:text-white rounded-lg w-10 h-10 inline-flex justify-center items-center"
-            >
-              <RxCross2 size={25}/>
-              <span className="sr-only">Close modal</span>
-            </button>
-          </div>
-
-          {/* Body */}
-          <div className="p-4 md:p-5">
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="input"
-              />
-              <input
-                type="tel"
-                placeholder="Mobile Number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="input"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input"
-              />
-
-              {error && <p className="text-red-500 text-sm">{error}</p>}
-              {success && <p className="text-green-500 text-sm">{success}</p>}
-
-              <button
-                type="submit"
-                className="w-full text-white bg-gray-800 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
-              >
-                Create Account
-              </button>
-              <div className="text-sm font-medium text-gray-500 hover:text-orange-500  text-center">
-                Already registered?{" "}
-                <a className="text-blue-700 hover:underline hover:text-orange-500">
-                  Login
-                </a>
-              </div>
-            </form>
-          </div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl w-full max-w-md mx-4 p-6 relative animate-fade-in">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-2xl font-semibold text-zinc-800 dark:text-white">
+            Sign Up
+          </h3>
+          <button
+            onClick={onClose}
+            className="text-zinc-600 hover:text-red-500 transition-colors"
+          >
+            <RxCross2 size={24} />
+          </button>
         </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            placeholder="Full Name"
+            className="px-4 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 dark:bg-orange-300 dark:border-orange-300 dark:text-white"
+          />
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Email"
+            className="px-4 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 dark:bg-orange-300 dark:border-orange-300 dark:text-white"
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="Password"
+            className="px-4 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 dark:bg-orange-300 dark:border-orange-300 dark:text-white"
+          />
+<Button htmlType="submit" type="primary">
+  Register
+</Button>
+
+          {error && (
+            <div className="bg-red-500 text-white text-sm py-1 px-3 rounded-md mt-1">
+              {error}
+            </div>
+          )}
+
+          <p className="text-sm text-right mt-2 text-zinc-600 dark:text-zinc-300">
+            Already have an account?{" "}
+            <Link href="/" className="text-green-600 underline">
+              Login
+            </Link>
+          </p>
+        </form>
       </div>
     </div>
   );

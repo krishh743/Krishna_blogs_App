@@ -15,31 +15,29 @@ const LoginPage: React.FC<ModalProps> = ({ onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
 
     if (!email || !password) {
-      setError("Email and Password are required.");
+      setError("Email and password are required.");
       return;
     }
 
     const res = await signIn("credentials", {
-      redirect: false,
+      redirect: false, // Prevent NextAuth from redirecting by default
       email,
       password,
     });
 
     if (res?.error) {
+      console.log("Login Error:", res.error); // Log the actual message
       setError("Invalid email or password.");
     } else {
-      setSuccess("Logged in successfully!");
-      setTimeout(() => {
-        router.push("/all-pages/categories-blogs");
-      }, 1000);
+      // Redirect after successful login
+      router.push("/all-pages/categories-blogs");
+      onClose(); // Optional: Close modal after successful login
     }
   };
 
@@ -66,18 +64,18 @@ const LoginPage: React.FC<ModalProps> = ({ onClose }) => {
             type="email"
             value={email}
             placeholder="Email"
-            className="px-4 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 dark:bg-orange-300 dark:border-orange-300 dark:text-white"
+            className="px-4 py-2 border border-orange-300 rounded-md"
           />
           <input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             value={password}
             placeholder="Password"
-            className="px-4 py-2 border border-orange-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 dark:bg-orange-300 dark:border-orange-300 dark:text-white"
+            className="px-4 py-2 border border-orange-300 rounded-md"
           />
           <button
             type="submit"
-            className="w-full text-white bg-gray-800 hover:bg-orange-800 transition-colors rounded-lg px-4 py-2 font-medium"
+            className="w-full text-white bg-gray-800 hover:bg-orange-800 rounded-lg px-4 py-2 font-medium"
           >
             Login
           </button>
@@ -87,18 +85,6 @@ const LoginPage: React.FC<ModalProps> = ({ onClose }) => {
               {error}
             </div>
           )}
-          {success && (
-            <div className="bg-green-500 text-white text-sm py-1 px-3 rounded-md mt-1">
-              {success}
-            </div>
-          )}
-
-          <p className="text-sm text-right mt-2 text-zinc-600 dark:text-zinc-300">
-            Don't have an account?{" "}
-            <span className="text-green-600 underline cursor-pointer">
-              Sign Up
-            </span>
-          </p>
         </form>
       </div>
     </div>

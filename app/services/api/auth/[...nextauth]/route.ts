@@ -6,7 +6,7 @@ import { NextAuthOptions } from "next-auth";
 import User from "@/app/models/users";
 
 export const authOptions: NextAuthOptions = {
-  providers: [
+  providers: [  
     CredentialsProvider({
       name: "credentials",
       credentials: {

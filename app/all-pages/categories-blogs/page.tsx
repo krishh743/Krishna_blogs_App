@@ -15,19 +15,10 @@ function page() {
     <main className="max-w-5xl mx-auto">
       {/* <NewsletterHeader /> */}
       <div className="flex justify-between py-4 gap-4 items-center">
-        {/* <x
-          id="countries"
-          className="w-[30%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        >
-          {blogsData.map((items) => {
-            return <option selected>{items.slug}</option>;
-          })}
-        </select> */}
-          {/* <div className="flex justify-end mb-4 w-full"> */}
+      
         <Button
         onClick={()=>router.push("/")}
-          // className="text-sm text-gray-800 hover:underline hover:text-orange-800 hover:border-orange-800 border border-gray-800 px-3 py-1 rounded"
-        >
+=        >
           ← Go to Home
         </Button>
       {/* </div> */}

@@ -18,7 +18,8 @@ function page() {
       
         <Button
         onClick={()=>router.push("/")}
-=        >
+          // className="text-sm text-gray-800 hover:underline hover:text-orange-800 hover:border-orange-800 border border-gray-800 px-3 py-1 rounded"
+        >
           ← Go to Home
         </Button>
       {/* </div> */}

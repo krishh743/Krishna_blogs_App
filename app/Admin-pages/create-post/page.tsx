@@ -11,7 +11,6 @@ function page() {
   };
   return (
     <div>
-      {" "}
       <RichTextEditor content={post} onChange={onChange} />
     </div>
   );

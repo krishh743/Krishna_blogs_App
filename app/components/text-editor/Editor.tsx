@@ -37,7 +37,7 @@ export default function RichTextEditor({
         types: ["heading", "paragraph"],
       }),
       Highlight,
-      Image, // ✅ Add this line
+      Image, // ✅ Add this line ans also you can add more lines AS PER REQUIREMENT
     ],
     content: content,
     editorProps: {

@@ -86,18 +86,8 @@ import ImageUploader from "../image-uploader/ImageUploader";
         onClick: () => editor.chain().focus().toggleHighlight().run(),
         preesed: editor.isActive("highlight"),
       },
-    //   {
-    //     icon: <ImagePlus className="size-4" />,
-    //     onClick: () => {
-    //       const url = window.prompt("Enter image URL");
-    //       if (url) {
-    //         editor.chain().focus().setImage({ src: url }).run();
-    //       }
-    //     },
-    //     preesed: false,
-    //   }
-      
-      
+ 
+           
     ];
   
     return (

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Profile from "../assets/profile-krishna.jpeg";
 
 export const BlogCard = ({ blog }: { blog: any }) => {
   return (

@@ -1,16 +1,12 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { FiSend } from "react-icons/fi";
 
 export const NewsletterHeader = () => {
-  const router = useRouter();
 
   return (
     <div className="flex flex-col items-center justify-center p-10">
-      {/* <div className="bg-yellow-400 p-3 rounded-full">
-        <svg className="w-10 h-10" viewBox="0 0 24 24" fill="black"><path d="..." /></svg>
-      </div> */}
+  
        <div className="flex justify-end mb-4 w-full">
         <Link
           href="/"

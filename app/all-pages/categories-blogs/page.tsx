@@ -18,14 +18,12 @@ function page() {
       
         <Button
         onClick={()=>router.push("/")}
-          // className="text-sm text-gray-800 hover:underline hover:text-orange-800 hover:border-orange-800 border border-gray-800 px-3 py-1 rounded"
         >
           ← Go to Home
         </Button>
       {/* </div> */}
         <Button
           onClick={() => router.push("/Admin-pages/create-post")}
-          // className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
         >
           Create Post
         </Button>

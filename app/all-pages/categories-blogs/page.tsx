@@ -1,12 +1,10 @@
 "use client";
 
 import { BlogCard } from "@/app/components/BlogCard";
-import { NewsletterHeader } from "@/app/components/NewsletterHeader";
 import { blogsData } from "@/app/data/blogs";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Pagination from "@/app/components/pagination/Pagination";
-import Link from "next/link";
 import { Button } from "antd";
 
 function page() {

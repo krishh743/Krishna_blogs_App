@@ -8,7 +8,6 @@ import LoginPage from "@/app/auth/Login";
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  // const[active,inActiv/e]=useState(false)
   const [loginCancel,setLoginCancel]=useState(false)
 
   const toggleMenu = () => setIsOpen(!isOpen);

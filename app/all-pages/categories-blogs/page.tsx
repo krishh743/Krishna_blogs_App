@@ -19,7 +19,7 @@ function page() {
         >
           ← Go to Home
         </Button>
-      {/* </div> */}
+      
         <Button
           onClick={() => router.push("/Admin-pages/create-post")}
         >
@@ -73,7 +73,7 @@ export default page;
 //       <Navigation />
 
 //       <div className="relative px-6 py-10 mt-20">
-//         {/* Go Back Button */}
+
 //         <button
 //           onClick={() => router.back()}
 //           className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"

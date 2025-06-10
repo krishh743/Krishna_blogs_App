@@ -46,7 +46,6 @@ export default function RichTextEditor({
       },
     },
     onUpdate: ({ editor }) => {
-      // console.log(editor.getHTML());
       onChange(editor.getHTML());
     },
   });

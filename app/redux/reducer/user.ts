@@ -1,3 +1,5 @@
 const myData ={
-    name:"krishna "
+    name:"krishna ",
+    age:26,
+    contactNumber:""
 }

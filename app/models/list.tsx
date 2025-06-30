@@ -1,8 +1,14 @@
+import { Button } from 'antd'
 import React from 'react'
 
 function list() {
   return (
-    <div>list</div>
+    <div>
+
+        <Button>
+View List Items
+        </Button>
+    </div>
   )
 }
 

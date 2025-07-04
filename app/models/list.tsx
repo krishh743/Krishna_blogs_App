@@ -13,6 +13,12 @@ View List Items
         <Button>
 Next
         </Button>
+         <Button>
+View List Items
+        </Button>
+        <Button>
+Next
+        </Button>
     </div>
   )
 }

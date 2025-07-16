@@ -7,18 +7,7 @@ function list() {
 <div>
   List Of items from user dedatils
 </div>
-        <Button>
-View List Items
-        </Button>
-        <Button>
-Next
-        </Button>
-         <Button>
-View List Items
-        </Button>
-        <Button>
-Next
-        </Button>
+  
     </div>
   )
 }

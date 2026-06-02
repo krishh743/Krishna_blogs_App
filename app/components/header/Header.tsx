@@ -22,26 +22,45 @@ export const Header = (props: { data: HeaderData }) => {
       className="relative bg-cover bg-center h-screen"
       style={{ backgroundImage: `url(${Banner.src})` }}
     >
-      <div className="intro h-full flex items-center justify-center">
-        <div className="overlay bg-black bg-opacity-50 w-full h-full absolute top-0 left-0"></div>
-        <div className="container relative z-10 text-center text-white">
-          <div className="max-w-2xl mx-auto flex flex-col items-center justify-center gap-10">
-            <h1 className="text-4xl md:text-8xl font-bold">
-              {props.data ? props.data.title : "Loading"}
-              <span></span>
-            </h1>
-            <p className="text-lg md:text-xl">
-              {props.data ? props.data.paragraph : "Loading"}
-            </p>
-            <Button
-              onClick={handleGetStarted}
-              // className="btn border hover:bg-orange-500  text-white py-3 px-6 rounded-lg shadow-lg transition duration-300"
-            >
-              Get Blogs
-            </Button>
-          </div>
-        </div>
+      <div className="intro h-full flex items-center justify-center relative overflow-hidden">
+  
+  {/* Dark Overlay */}
+  <div className="overlay bg-black/70 w-full h-full absolute top-0 left-0"></div>
+
+  {/* Animated Gradient Blur */}
+  <div className="absolute w-72 h-72 bg-orange-500/30 blur-3xl rounded-full top-10 left-10 animate-pulse"></div>
+  <div className="absolute w-72 h-72 bg-pink-500/30 blur-3xl rounded-full bottom-10 right-10 animate-pulse"></div>
+
+  <div className="container relative z-10 text-center text-white px-6">
+    <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-8">
+
+      {/* Heading */}
+      <h1 className="text-5xl md:text-8xl font-extrabold leading-tight bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">
+        {props.data ? props.data.title : "Loading"}
+      </h1>
+
+      {/* Paragraph */}
+      <p className="text-lg md:text-2xl text-gray-200 leading-8 max-w-3xl tracking-wide">
+        {props.data ? props.data.paragraph : "Loading"}
+      </p>
+
+      {/* Buttons */}
+      <div className="flex flex-col sm:flex-row gap-4 mt-4">
+        <Button
+          onClick={handleGetStarted}
+          className="bg-gradient-to-r from-orange-500 to-pink-500 hover:scale-105 transition-all duration-300 text-white px-8 py-6 rounded-2xl text-lg shadow-2xl hover:shadow-orange-500/50"
+        >
+          Explore Blogs 🚀
+        </Button>
+
+        {/* <button className="border border-white/30 backdrop-blur-md bg-white/10 hover:bg-white/20 transition-all duration-300 px-8 py-4 rounded-2xl text-lg font-medium shadow-lg">
+          Start Writing ✍️
+        </button> */}
       </div>
+
+    </div>
+  </div>
+</div>
     </header>
   );
 };

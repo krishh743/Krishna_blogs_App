@@ -24,79 +24,91 @@ export const Navigation = () => {
 
   return (
     <>
-      <nav className="bg-[#f8f8f8] border-xl bg-transparent backdrop-blur-md fixed w-full top-0 shadow-md z-50">
-        <div className="container mx-auto flex justify-between items-center py-2 px-6">
-          <div className="text-xl font-bold">
-            <a href="#page-top" className="page-scroll">
-              <img
-                src={Logo.src}
-                className="h-10 forced-color-adjust-auto bg-transparent backdrop-blur-md"
-                alt="Logo"
-              />
-            </a>
-          </div>
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-2xl border-b border-white/10 shadow-2xl">
+  <div className="container mx-auto flex items-center justify-between px-6 py-4">
 
-          <div
-            className={`md:flex space-x-6 ${
-              isOpen
-                ? "flex flex-col md:flex-row absolute top-16 left-0 w-full bg-white shadow-md md:static md:shadow-none p-4 md:p-0"
-                : "hidden"
-            }`}
-          >
-            <a
-              href="#features"
-              className="page-scroll hover:text-orange-500 hover:underline py-2 md:py-0"
-              onClick={() => setIsOpen(false)}
-            >
-              Features
-            </a>
-            <a
-              href="#about"
-              className="page-scroll hover:text-orange-500 hover:underline py-2 md:py-0"
-              onClick={() => setIsOpen(false)}
-            >
-              About
-            </a>
-            <a
-              href="#services"
-              className="page-scroll hover:text-orange-500 hover:underline py-2 md:py-0"
-              onClick={() => setIsOpen(false)}
-            >
-              Services
-            </a>
-            <a
-              href="#contact"
-              className="page-scroll hover:text-orange-500 hover:underline py-2 md:py-0"
-              onClick={() => setIsOpen(false)}
-            >
-              Contact
-            </a>
-            <div>
-              <button
-                onClick={handleOpenModal}
-                className="hover:text-orange-500 hover:underline py-2 md:py-0"
-              >
-                SignIn
-              </button>{" "}
-              /{" "}
-              <button
-                onClick={handleOpenModalForLogin}
-                className="hover:text-orange-500 hover:underline py-2 md:py-0"
-              >
-                LogIn
-              </button>
-            </div>
-          </div>
+    {/* Logo */}
+    <div className="flex items-center gap-3">
+      <a href="#page-top" className="group flex items-center gap-3">
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-500 blur-lg opacity-60 group-hover:opacity-100 transition duration-300 rounded-full"></div>
 
-          <button
-            className="md:hidden text-xl"
-            aria-label="Toggle navigation"
-            onClick={toggleMenu}
-          >
-            ☰
-          </button>
+          <img
+            src={Logo.src}
+            className="relative h-12 w-12 rounded-full object-cover border-2 border-white/20 shadow-xl"
+            alt="Logo"
+          />
         </div>
-      </nav>
+
+        <div className="hidden sm:block">
+          <h1 className="text-2xl font-extrabold bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+            Techs Krishna
+          </h1>
+
+          <p className="text-xs text-gray-300 tracking-widest">
+            BLOG PLATFORM
+          </p>
+        </div>
+      </a>
+    </div>
+
+    {/* Desktop Menu */}
+    <div
+      className={`md:flex items-center gap-8 ${
+        isOpen
+          ? "flex flex-col absolute top-20 left-4 right-4 bg-black/90 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl p-8 md:p-0 md:static md:bg-transparent md:border-0"
+          : "hidden"
+      }`}
+    >
+
+      {[
+        { href: "#features", label: "Features" },
+        { href: "#about", label: "About" },
+        { href: "#services", label: "Services" },
+        { href: "#contact", label: "Contact" },
+      ].map((item, index) => (
+        <a
+          key={index}
+          href={item.href}
+          onClick={() => setIsOpen(false)}
+          className="relative text-white text-lg font-medium hover:text-orange-400 transition duration-300 group"
+        >
+          {item.label}
+
+          {/* Underline Animation */}
+          <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-orange-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+      ))}
+
+      {/* Auth Buttons */}
+      <div className="flex items-center gap-4 mt-4 md:mt-0">
+
+        <button
+          onClick={handleOpenModal}
+          className="px-6 py-2 rounded-full border border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white transition duration-300 shadow-lg"
+        >
+          Sign Up
+        </button>
+
+        <button
+          onClick={handleOpenModalForLogin}
+          className="px-6 py-2 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 text-white shadow-xl hover:scale-105 transition duration-300"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+
+    {/* Mobile Menu Button */}
+    <button
+      className="md:hidden flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 text-white text-2xl shadow-lg hover:bg-orange-500/20 transition duration-300"
+      aria-label="Toggle navigation"
+      onClick={toggleMenu}
+    >
+      {isOpen ? "✕" : "☰"}
+    </button>
+  </div>
+</nav>
 
       {/* Render Modal if showModal is true */}
       {showModal && <Modal onClose={() => setShowModal(false)} />}

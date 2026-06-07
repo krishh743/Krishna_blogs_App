@@ -1,62 +1,74 @@
-import React from "react";
+"use client";
 
-function Pagination() {
+import React, { useState } from "react";
+import { FaFire, FaClock, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+
+interface PaginationProps {
+  currentPage?: number;
+  totalPages?: number;
+  onPageChange?: (page: number) => void;
+}
+
+function Pagination({
+  currentPage = 1,
+  totalPages = 10,
+  onPageChange,
+}: PaginationProps) {
+  const [activeTab, setActiveTab] = useState("trending");
+
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      onPageChange?.(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      onPageChange?.(currentPage + 1);
+    }
+  };
+
   return (
-    <div>
-      <div className="my-4 flex flex-col items-center">
-        <span className="text-sm text-gray-700 dark:text-gray-400">
-          Showing{" "}
-          <span className="font-semibold text-gray-900 dark:text-white">1</span>{" "}
-          to{" "}
-          <span className="font-semibold text-gray-900 dark:text-white">
-            10
-          </span>{" "}
-          of{" "}
-          <span className="font-semibold text-gray-900 dark:text-white">
-            100
-          </span>{" "}
-          Entries
-        </span>
-        <div className="inline-flex mt-2 xs:mt-0">
-          <button className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <svg
-              className="w-3.5 h-3.5 me-2 rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 5H1m0 0 4 4M1 5l4-4"
-              />
-            </svg>
-            Prev
-          </button>
-          <button className="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            Next
-            <svg
-              className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+    <div className="mt-16 flex justify-center">
+  <div className="flex items-center gap-4 rounded-full border border-white/10 bg-white/10 backdrop-blur-xl px-6 py-4 shadow-2xl">
+
+    {/* Prev Button */}
+    <button className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-pink-500 px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-105">
+      ← Prev
+    </button>
+
+    {/* Page Numbers */}
+    <div className="flex items-center gap-3">
+
+      <button className="w-11 h-11 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 text-white font-bold shadow-lg scale-110">
+        1
+      </button>
+
+      <button className="w-11 h-11 rounded-full bg-white/10 text-gray-300 font-semibold hover:bg-white/20 transition duration-300">
+        2
+      </button>
+
+      <button className="w-11 h-11 rounded-full bg-white/10 text-gray-300 font-semibold hover:bg-white/20 transition duration-300">
+        3
+      </button>
+
+      <button className="w-11 h-11 rounded-full bg-white/10 text-gray-300 font-semibold hover:bg-white/20 transition duration-300">
+        4
+      </button>
+
+      <span className="text-gray-400 text-lg">...</span>
+
+      <button className="w-11 h-11 rounded-full bg-white/10 text-gray-300 font-semibold hover:bg-white/20 transition duration-300">
+        10
+      </button>
     </div>
+
+    {/* Next Button */}
+    <button className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-105">
+      Next →
+    </button>
+  </div>
+</div>
   );
 }
 

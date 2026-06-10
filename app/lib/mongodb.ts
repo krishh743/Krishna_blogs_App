@@ -22,19 +22,31 @@
 // };
 
 // app/lib/mongodb.ts
+// import mongoose from "mongoose";
+
+// export const connectMongoDB = async () => {
+//   if (mongoose.connections[0].readyState) return;
+
+//   try {
+//     await mongoose.connect(process.env.MONGODB_URI as string, {
+//       dbName: "authapp",
+//     });
+//     console.log("MongoDB connected");
+//   } catch (error) {
+//     console.error("MongoDB connection error:", error);
+//     throw new Error("MongoDB connection failed");
+//   }
+// };
 import mongoose from "mongoose";
 
-export const connectMongoDB = async () => {
-  if (mongoose.connections[0].readyState) return;
-
+const connectMongoDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI as string, {
-      dbName: "authapp",
-    });
-    console.log("MongoDB connected");
+    await mongoose.connect(process.env.MONGODB_URI as string);
+
+    console.log("MongoDB Connected");
   } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw new Error("MongoDB connection failed");
+    console.log(error);
   }
 };
 
+export default connectMongoDB;

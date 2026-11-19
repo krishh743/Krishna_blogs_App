@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import "./globals.css";
 
-import SmoothScroll from "smooth-scroll";
-
 import { About } from "./components/header/About";
 import { Services } from "./components/header/Services";
 import { Contact } from "./components/header/ContactUs";
@@ -14,16 +12,31 @@ import { Features } from "./components/header/Features";
 
 import { pageData } from "./utills/data/data";
 
-export const scroll = new SmoothScroll('a[href*="#"]', {
-  speed: 1000,
-  speedAsDuration: true,
-});
-
 const App = () => {
   const [landingPageData, setLandingPageData] = useState<any>({});
 
   useEffect(() => {
     setLandingPageData(pageData);
+    let active = true;
+    let scroll: { destroy: () => void } | undefined;
+
+    import("smooth-scroll")
+      .then(({ default: SmoothScroll }) => {
+        if (!active) return;
+
+        scroll = new SmoothScroll('a[href*="#"]', {
+          speed: 1000,
+          speedAsDuration: true,
+        });
+      })
+      .catch((error) => {
+        console.error("Failed to initialize smooth scrolling:", error);
+      });
+
+    return () => {
+      active = false;
+      scroll?.destroy();
+    };
   }, []);
 
   return (

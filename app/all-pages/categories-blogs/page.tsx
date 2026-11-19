@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { BlogCard } from "@/app/components/BlogCard";
@@ -11,8 +11,54 @@ import { Button } from "antd";
 
 import { FaArrowLeft, FaPenNib, FaFireAlt } from "react-icons/fa";
 
+interface BlogSummary {
+  slug: string;
+  title: string;
+  summary: string;
+  image: string;
+  date: string;
+  authorName?: string;
+}
+
 function Page() {
   const router = useRouter();
+  const [blogs, setBlogs] = useState<BlogSummary[]>(blogsData);
+  const [loadError, setLoadError] = useState("");
+
+  useEffect(() => {
+    let active = true;
+
+    const loadBlogs = async () => {
+      try {
+        const response = await fetch("/api/blogs");
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "Unable to load blog posts.");
+        }
+        if (!Array.isArray(result.blogs)) {
+          throw new Error("The blog service returned an invalid response.");
+        }
+
+        if (active) {
+          setBlogs([...result.blogs, ...blogsData]);
+          setLoadError("");
+        }
+      } catch (error) {
+        console.error("Blog listing error:", error);
+        if (active) {
+          setLoadError(
+            error instanceof Error ? error.message : "Unable to load blog posts."
+          );
+        }
+      }
+    };
+
+    void loadBlogs();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white relative overflow-hidden">
@@ -92,8 +138,13 @@ function Page() {
 
         {/* Blog Cards ,grid grid-cols-1 md:grid-cols-2 gap-8*/}
         <div className="">
-          {blogsData.map((blog) => (
-            <BlogCard key={blog.slug} blog={blog} />
+          {loadError && (
+            <p role="alert" className="mb-4 rounded-lg bg-red-950/60 p-3 text-red-200">
+              {loadError}
+            </p>
+          )}
+          {blogs.map((blog, index) => (
+            <BlogCard key={`${blog.slug}-${index}`} blog={blog} />
           ))}
         </div>
 

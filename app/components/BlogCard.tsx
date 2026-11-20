@@ -3,12 +3,22 @@ import { useState } from "react";
 
 import { FaArrowRight, FaHeart, FaRegHeart } from "react-icons/fa";
 
-export const BlogCard = ({ blog }: { blog: any }) => {
+interface BlogCardData {
+  slug: string;
+  title: string;
+  summary: string;
+  date: string;
+  image: string;
+  authorName?: string;
+}
+
+export const BlogCard = ({ blog }: { blog: BlogCardData }) => {
   const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(blog.likes || 12);
+  const [likes, setLikes] = useState(12);
 
   const handleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (liked) {
       setLikes(likes - 1);
@@ -20,7 +30,7 @@ export const BlogCard = ({ blog }: { blog: any }) => {
   };
 
   return (
-    <Link href={`blogs/${blog.slug}`}>
+    <Link href={`/all-pages/blogs/${blog.slug}`}>
       <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/10 backdrop-blur-xl shadow-xl hover:shadow-orange-500/20 transition-all duration-500 hover:-translate-y-2 cursor-pointer">
         {/* Gradient Glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-pink-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
@@ -36,17 +46,17 @@ export const BlogCard = ({ blog }: { blog: any }) => {
 
                 <img
                   src="/images/profile-krishna.png"
-                  alt="Author"
+                  alt="Blog author"
                   className="relative w-12 h-12 rounded-full object-cover border-2 border-white/20"
                 />
               </div>
 
               <div>
                 <p className="text-sm font-semibold text-white">
-                  Techs Krishna
+                  {blog.authorName || "The Krishna"}
                 </p>
 
-                <p className="text-xs text-gray-400">Blog Creator ✨</p>
+                <p className="text-xs text-gray-400">Blog Creator</p>
               </div>
             </div>
 
@@ -61,10 +71,18 @@ export const BlogCard = ({ blog }: { blog: any }) => {
             {blog.title}
           </h2>
 
+          {blog.image && (
+            <img
+              src={blog.image}
+              alt=""
+              className="mb-6 max-h-80 w-full rounded-2xl object-cover"
+            />
+          )}
+
           {/* Summary */}
           <p className="text-gray-300 leading-7 text-sm mb-6">
             {blog.summary.split(" ").slice(0, 20).join(" ")}
-            ...
+            {blog.summary.split(" ").length > 20 ? "..." : ""}
           </p>
 
           {/* Footer */}

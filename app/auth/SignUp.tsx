@@ -3,6 +3,7 @@
 import { Button } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 import {
@@ -45,24 +46,6 @@ const Modal: React.FC<ModalProps> = ({ onClose, openLogin }) => {
     try {
       setLoading(true);
 
-      // Check Existing User
-      const resUserExists = await fetch("/services/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const { user } = await resUserExists.json();
-
-      if (user) {
-        setError("User already exists.");
-        setLoading(false);
-        return;
-      }
-
-      // Register User
       const res = await fetch("/api/register", {
         method: "POST",
         headers: {
@@ -75,18 +58,32 @@ const Modal: React.FC<ModalProps> = ({ onClose, openLogin }) => {
         }),
       });
 
-      if (res.ok) {
-        setName("");
-        setEmail("");
-        setPassword("");
+      const data = await res.json();
 
-        router.push("/");
-        onClose();
-      } else {
-        setError("Registration failed.");
+      if (!res.ok) {
+        setError(data.message || "Registration failed.");
+        return;
       }
+
+      const signInResult = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (!signInResult || signInResult.error) {
+        setError("Your account was created, but automatic sign-in failed. Please log in.");
+        return;
+      }
+
+      setName("");
+      setEmail("");
+      setPassword("");
+
+      router.push("/Admin-pages/create-post");
+      onClose();
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError("Something went wrong.");
     } finally {
       setLoading(false);
